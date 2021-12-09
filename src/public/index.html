@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Notes Comming....</h1>
+
+    <ul id="notes-list"></ul>
+    <script>
+        window.onload = function(){
+            const notesList = document.querySelector("#notes-list")
+            const craeteUI = notes => {
+                // Display notes on UI
+                notes.forEach(note => {
+                    const li = document.createElement("li")
+                    li.innerHTML = `
+                        ${note.title.toUpperCase()} - ${note.body}
+                    `
+                    notesList.append(li)
+                });
+            }
+
+            fetch("/notes")
+            .then(response => response.json())
+            .then(notes => craeteUI(notes))
+            .catch(console.log)
+        }
+    </script>
+</body>
+</html>
